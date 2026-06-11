@@ -338,6 +338,10 @@ const CutCmd* g_CutsceneScripts[MAX_CUTSCENES];
 // Copia locale del livello attuale
 struct Level g_ActiveLevel;
 
+void PrintGFXTime(u8 x, u8 y) {
+	PrintGFXText("TIME   '  \"", x, y);
+}
+
 u8 SegmentForLevel(u8 lvlidx) {
 	if (lvlidx < 14) {
 		return 1;
@@ -851,7 +855,7 @@ WITH_SEGMENT(1) {
 		PrintGFXNumber(g_NextLevelIdx + 1, 10, 18);
 
 		// Tempo rimanente
-		PrintGFXText("TIME   '  \"", 18, 18);
+		PrintGFXTime(18, 18);
 		PrintGFXNumber(g_RemainingMinutes, 23, 18);
 		PrintGFXNumber(g_RemainingSeconds, 26, 18);
 
@@ -907,7 +911,7 @@ WITH_SEGMENT(3) {
 	AllocateSpriteIDs(&g_ActiveLevel);
 }
 
-	PrintGFXText("TIME   '  \"", 2, 0);
+	PrintGFXTime(2, 0);
 	PrintTime();
 
 	Game_SetState(State_Game);
@@ -1231,7 +1235,7 @@ WITH_SEGMENT(4) {
 				SoundSwitchTo(g_CurrentSong);
 				FxPlay(SND_FX_UNPAUSE);
 }
-				PrintGFXText("TIME   '  \"", 2, 0);
+				PrintGFXTime(2, 0);
 				g_PauseState = 0;
 				Game_RestoreState();
 		}
