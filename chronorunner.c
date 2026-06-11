@@ -1211,20 +1211,6 @@ WITH_SEGMENT(4) {
 		PrintGFXText("PAUSED     ", 2, 0);
 		g_PauseState++;
 	}
-	else if (g_PauseState == 2)
-	{
-		if (!Keyboard_IsKeyPressed(PAUSE_KEY))
-		{
-			g_PauseState++;
-		}
-	}
-	else if (g_PauseState == 3)
-	{
-		if (Keyboard_IsKeyPressed(PAUSE_KEY))
-		{
-			g_PauseState++;
-		}
-	}
 	else if (g_PauseState == 4)
 	{
 		if (!Keyboard_IsKeyPressed(PAUSE_KEY))
@@ -1238,6 +1224,13 @@ WITH_SEGMENT(4) {
 				PrintGFXTime(2, 0);
 				g_PauseState = 0;
 				Game_RestoreState();
+		}
+	}
+	else
+	{
+		if (Keyboard_IsKeyPressed(PAUSE_KEY) == g_PauseState - 2)
+		{
+			g_PauseState++;
 		}
 	}
 	return TRUE;
